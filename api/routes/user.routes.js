@@ -14,7 +14,5 @@ module.exports = function(app) {
 
   app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
 
-  app.get("/api/test/notes", controller.getNotes);
-  // app.post("/api/test/notes", controller.newNote);
-  // app.delete("/api/test/notes", controller.DeleteNote);
+  app.post("/api/test/getBankDetails", controller.getBankDetails);
 };

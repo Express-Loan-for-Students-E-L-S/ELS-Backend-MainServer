@@ -8,15 +8,18 @@ exports.userBoard = (req, res) => {
 
 const client = require('../config/grpc.config')
 
-exports.getNotes = (req, res) => {
-  client.list({}, (error, notes) => {
-      if (!error) {
-          res.status(200).send({
-            message: 'successfully fetch List notes',
-            notes
-          });
-      } else {
-          res.status(500).send(error)
-      }
+exports.getBankDetails = (req, res) => {
+  let phoneno = {
+    phoneNum: req.body.phoneNum
+  }
+  client.getUserBankInfo(phoneno, (error, userBankDetails) => {
+    if (!error) {
+      res.status(200).json({
+        message: 'successfully fetch List userBankDetails',
+        userBankDetails
+      })
+    } else {
+      res.status(500).json(error)
+    }
   })
 }
