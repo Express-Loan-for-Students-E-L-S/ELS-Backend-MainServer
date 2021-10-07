@@ -7,7 +7,8 @@ const User = mongoose.model(
     lname: String,
     email: String,
     password: String,
-    userDetails: mongoose.Schema.Types.Mixed
+    userBankDetails: mongoose.Schema.Types.Mixed,
+    documents: mongoose.Schema.Types.Mixed
   })
 );
 

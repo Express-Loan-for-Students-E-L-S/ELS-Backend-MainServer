@@ -5,12 +5,59 @@ const User = db.user;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+const defaultUserBankDetails = {
+    fname: '',
+    lname: '',
+    gender: '',
+    address: '',
+    phoneNum: '',
+    email: '',
+    fatherName: '',
+    MotherName: '',
+    dob: '',
+    adharNum: '',
+    panNum: '',
+    accountNum: '',
+    ifscCode: '',
+    accountType: '',
+    bankName: '',
+}
+
+const defaultDocuments = {
+    adharcard: {
+        location: '',
+        uploadedFileName: ''
+    },
+    pancard: {
+        location: '',
+        uploadedFileName: ''
+    },
+    marksheet10: {
+        location: '',
+        uploadedFileName: ''
+    },
+    marksheet12: {
+        location: '',
+        uploadedFileName: ''
+    },
+    entrance: {
+        location: '',
+        uploadedFileName: ''
+    },
+    profile: {
+        location: '',
+        uploadedFileName: ''
+    }
+}
+
 exports.signup = (req, res) => {
     const user = new User({
         fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 8)
+        password: bcrypt.hashSync(req.body.password, 8),
+        userBankDetails: {...defaultUserBankDetails, fname: req.body.fname, lname: req.body.lname, email: req.body.email},
+        documents: defaultDocuments
     });
 
     user.save((err, user) => {
@@ -65,6 +112,8 @@ exports.signin = (req, res) => {
                 fname: user.fname,
                 lname: user.lname,
                 email: user.email,
+                userBankDetails: user.userBankDetails,
+                documents: user.documents,
                 accessToken: token
             });
         });

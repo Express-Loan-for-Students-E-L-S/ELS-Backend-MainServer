@@ -24,7 +24,11 @@ module.exports = function(app) {
 
   app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
 
-  app.post("/api/test/getBankDetails", controller.getBankDetails);
+  app.post("/api/user/getBankDetails",[authJwt.verifyToken], controller.getBankDetails);
+
+  app.post("/api/user/getConnectedBanks",[authJwt.verifyToken], controller.getConnectedBanks);
+  
+  app.post("/api/user/requestLoanOptions",[authJwt.verifyToken], controller.requestLoanOptions);
 
   app.post("/api/upload", [authJwt.verifyToken, upload], controller.uploadFile);
 };
