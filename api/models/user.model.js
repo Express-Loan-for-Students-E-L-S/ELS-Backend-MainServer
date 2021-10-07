@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const User = mongoose.model(
   "User",
   new mongoose.Schema({
-    username: String,
+    fname: String,
+    lname: String,
     email: String,
-    password: String
+    password: String,
+    userDetails: mongoose.Schema.Types.Mixed
   })
 );
 
